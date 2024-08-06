@@ -38,6 +38,10 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: const InputDecoration(hintText: "Digite seu email"),
               ),
 
+              const SizedBox(
+                height: 15,
+              ),
+
               //Senha
               TextFormField(
                 validator: (value) {
@@ -50,13 +54,17 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: const InputDecoration(hintText: "Digite sua senha"),
               ),
 
+              const SizedBox(
+                height: 15,
+              ),
+
               //Botão Entrar
               SizedBox(
                 width: MediaQuery.sizeOf(context).width,
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () => {if (formKey.currentState!.validate()) {
-                    
+
                   }},
                   child: const Text("Entrar"),
                 ),
