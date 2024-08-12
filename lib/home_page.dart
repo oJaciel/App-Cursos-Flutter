@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Text("Olá mundo"),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Lista de Cursos"),
+      ),
+      body: Text("Listagem de cursos vem aqui..."),
     );
   }
 }

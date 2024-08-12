@@ -1,3 +1,4 @@
+import 'package:appmobile/home_page.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -64,8 +65,14 @@ class _LoginPageState extends State<LoginPage> {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: () => {if (formKey.currentState!.validate()) {
-
-                  }},
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HomePage()
+                        )
+                    )
+                  }
+                  },
                   child: const Text("Entrar"),
                 ),
               )
