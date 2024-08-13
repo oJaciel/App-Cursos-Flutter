@@ -1,4 +1,4 @@
-import 'package:appmobile/login_page.dart';
+import 'package:appmobile/view/login_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
