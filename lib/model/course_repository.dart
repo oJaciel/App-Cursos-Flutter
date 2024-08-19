@@ -5,7 +5,7 @@ import 'package:appmobile/model/course_model.dart';
 import 'package:http/http.dart' as http;
 
 class courseRepository {
-  final Uri url = Uri.parse('$urlBaseApi/course');
+  final Uri url = Uri.parse('$urlBaseApi/courses');
 
   //Buscando a lista de todos os cursos na API
   Future<List<courseEntity>> getAll() async {

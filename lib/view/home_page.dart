@@ -1,3 +1,5 @@
+import 'package:appmobile/controller/course_controller.dart';
+import 'package:appmobile/model/course_model.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -8,13 +10,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late Future<List<String>> _futureCourses;
+  courseController controller = courseController();
+  late Future<List<courseEntity>> _futureCourses;
 
-  Future<List<String>> getCourses() async {
+  Future<List<courseEntity>> getCourses() async {
     //Obter a lista da API
-    return Future.delayed(Duration(seconds: 10), () {
-      return ['Curso 1', 'Curso 2', 'Curso 3'];
-    });
+    return await controller.getCourseList();
   }
 
   @override
@@ -31,17 +32,17 @@ class _HomePageState extends State<HomePage> {
       ),
       body: FutureBuilder(
         future: _futureCourses,
-        builder: (context, snapshot) {
+        builder: (context, AsyncSnapshot<List<courseEntity>> snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(snapshot.data![index]),
-                    subtitle: const Text('Subtítulo vem aqui'),
+                    title: Text(snapshot.data![index].name ?? "Não informado"),
+                    subtitle: Text(snapshot.data![index].description ?? "Não informado"),
                     trailing: const Icon(Icons.arrow_forward_ios),
                     leading: const CircleAvatar(
-                      child: Text('CC'),
+                      child: Text('CC'), //TODO
                     ),
                   );
                 });
