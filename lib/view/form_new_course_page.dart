@@ -22,28 +22,70 @@ class _formNewCoursePageState extends State<formNewCoursePage> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
         child: Form(
-          //TODO
-          //Validações do Form
-          //Colocar placeholders
-          //Pesquisar sobre como fazer o teclado subir
-          //Implementar no controller função que busque as duas primeiras letras de cada curso e colocar nos icons
           key: formKey,
           child: Column(
             children: [
-              TextFormField(),
-              const SizedBox(height: 10,),
-              TextFormField(),
-              const SizedBox(height: 10,),
-              TextFormField(),
-              const SizedBox(height: 10,),
+              //Nome do curso
+              TextFormField(
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Nome obrigatório";
+                  }
+                  return null;
+                },
+                maxLength: 50,
+                keyboardType: TextInputType.name,
+                decoration:
+                    const InputDecoration(hintText: "Digite o nome do curso"),
+              ),
+
+              const SizedBox(
+                height: 10,
+              ),
+
+              //Descrição
+              TextFormField(
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Descrição obrigatória';
+                  }
+                  return null;
+                },
+                maxLength: 200,
+                keyboardType: TextInputType.text,
+                decoration:
+                    const InputDecoration(hintText: "Digite a descrição"),
+              ),
+
+              const SizedBox(
+                height: 10,
+              ),
+
+              //Data de Início
+              TextFormField(
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Data obrigatória';
+                  }
+                  return null;
+                },
+                maxLength: 8,
+                keyboardType: TextInputType.datetime,
+                decoration:
+                    const InputDecoration(hintText: "Digite a data de início"),
+              ),
+
+              const SizedBox(
+                height: 10,
+              ),
+
               SizedBox(
-                width: MediaQuery.sizeOf(context).width,
-                height: 48,
-                child: ElevatedButton(
-                  onPressed: (){}, 
-                  child: const Text("Salvar")
-                  )
-                )
+                  width: MediaQuery.sizeOf(context).width,
+                  height: 48,
+                  child: ElevatedButton(
+                      onPressed: () =>
+                          {if (formKey.currentState!.validate()) {}},
+                      child: const Text("Salvar"))),
             ],
           ),
         ),
