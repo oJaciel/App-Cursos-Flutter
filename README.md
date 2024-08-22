@@ -1,4 +1,4 @@
-# App-Eventos-Flutter
+# App-Cursos-Flutter
 
 Projeto desenvolvido em Flutter, durante a disciplina de Desenvolvimento Mobile III, curso de Análise e Desenvolvimento de Sistemas (UPF).
 
