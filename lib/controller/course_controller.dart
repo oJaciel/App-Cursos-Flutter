@@ -20,7 +20,7 @@ class courseController {
       return "NA";
     } else {
       //Se não estiver vazio, retorna as duas primeiras letras
-      return avatarName!.substring(0, 2).toUpperCase();
+      return avatarName.substring(0, 2).toUpperCase();
     }
 
     
