@@ -1,3 +1,5 @@
+import 'package:appmobile/controller/course_controller.dart';
+import 'package:appmobile/model/course_model.dart';
 import 'package:flutter/material.dart';
 
 class formNewCoursePage extends StatefulWidget {
@@ -9,6 +11,34 @@ class formNewCoursePage extends StatefulWidget {
 
 class _formNewCoursePageState extends State<formNewCoursePage> {
   final formKey = GlobalKey<FormState>();
+
+  TextEditingController textNameController = TextEditingController();
+  TextEditingController textDescriptionController = TextEditingController();
+  TextEditingController textStartAtController = TextEditingController();
+
+  courseController controller = courseController();
+
+  postNewCourse() async {
+    try {
+      await controller.postNewCourse(CourseEntity(
+          name: textNameController.text,
+          description: textDescriptionController.text,
+          startAt: textStartAtController.text));
+      //
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Curso inserido com sucesso."),
+        ),
+      );
+      Navigator.pop(context);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$e'),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +56,8 @@ class _formNewCoursePageState extends State<formNewCoursePage> {
               constraints: BoxConstraints(minHeight: constraints.maxHeight),
               child: IntrinsicHeight(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
                   child: Column(
                     children: [
                       Form(
@@ -35,6 +66,7 @@ class _formNewCoursePageState extends State<formNewCoursePage> {
                           children: [
                             // Nome do curso
                             TextFormField(
+                              controller: textNameController,
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   return "Nome obrigatório";
@@ -50,6 +82,7 @@ class _formNewCoursePageState extends State<formNewCoursePage> {
 
                             // Descrição
                             TextFormField(
+                              controller: textDescriptionController,
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   return 'Descrição obrigatória';
@@ -65,6 +98,7 @@ class _formNewCoursePageState extends State<formNewCoursePage> {
 
                             // Data de Início
                             TextFormField(
+                              controller: textStartAtController,
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   return 'Data obrigatória';
@@ -86,9 +120,9 @@ class _formNewCoursePageState extends State<formNewCoursePage> {
                         width: double.infinity,
                         height: 48,
                         child: ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             if (formKey.currentState!.validate()) {
-                              // Ação de salvar
+                              postNewCourse();
                             }
                           },
                           child: const Text("Salvar"),

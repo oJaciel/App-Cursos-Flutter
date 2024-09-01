@@ -13,17 +13,21 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   courseController controller = courseController();
 
-  late Future<List<courseEntity>> _futureCourses;
+  late Future<List<CourseEntity>> _futureCourses;
 
   void navigateToForm() {
     Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => formNewCoursePage(),
-        ));
+      context,
+      MaterialPageRoute(
+        builder: (context) => const formNewCoursePage(),
+      ),
+    ).then((value) {
+      _futureCourses = getCourses();
+      setState(() => {});
+    });
   }
 
-  Future<List<courseEntity>> getCourses() async {
+  Future<List<CourseEntity>> getCourses() async {
     //Obter a lista da API
     return await controller.getCourseList();
   }
@@ -46,7 +50,7 @@ class _HomePageState extends State<HomePage> {
       ),
       body: FutureBuilder(
         future: _futureCourses,
-        builder: (context, AsyncSnapshot<List<courseEntity>> snapshot) {
+        builder: (context, AsyncSnapshot<List<CourseEntity>> snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
                 itemCount: snapshot.data!.length,
@@ -60,9 +64,9 @@ class _HomePageState extends State<HomePage> {
                     subtitle: Text(
                         snapshot.data![index].description ?? "Não informado"),
                     trailing: const Icon(Icons.arrow_forward_ios),
-                    leading: CircleAvatar(
-                      child: Text(avatarText) //Montando Avatar,
-                    ),
+                    leading:
+                        CircleAvatar(child: Text(avatarText) //Montando Avatar,
+                            ),
                   );
                 });
           } else {

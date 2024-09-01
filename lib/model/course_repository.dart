@@ -8,8 +8,8 @@ class courseRepository {
   final Uri url = Uri.parse('$urlBaseApi/courses');
 
   //Buscando a lista de todos os cursos na API
-  Future<List<courseEntity>> getAll() async {
-    List<courseEntity> courseList = [];
+  Future<List<CourseEntity>> getAll() async {
+    List<CourseEntity> courseList = [];
 
     final response = await http.get(url);
     if (response.statusCode == 200) {
@@ -17,9 +17,17 @@ class courseRepository {
       final json = jsonDecode(response.body) as List;
 
       for (var course in json) {
-        courseList.add(courseEntity.fromJson(course));
+        courseList.add(CourseEntity.fromJson(course));
       }
     }
     return courseList;
+  }
+
+  postNewCourse(CourseEntity courseEntity) async {
+    final json = jsonEncode(CourseEntity.toJson(courseEntity));
+    var response = await http.post(url, body: json);
+    if (response.statusCode != 201) {
+      throw 'Problema ao inserir curso';
+    }
   }
 }

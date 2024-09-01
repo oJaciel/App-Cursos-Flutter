@@ -5,14 +5,14 @@ class courseController {
   //Instanciando variável do repositório
   courseRepository repository = courseRepository();
 
-  Future<List<courseEntity>> getCourseList() async {
-    List<courseEntity> list = await repository.getAll();
+  Future<List<CourseEntity>> getCourseList() async {
+    List<CourseEntity> list = await repository.getAll();
     //Aqui poderia alterar, formatar, implementar regras na lista
     return list;
   }
 
   //Função para preencher avatar dos cursos
-  String getCourseAvatar(courseEntity course) {
+  String getCourseAvatar(CourseEntity course) {
     //Captando nome do curso
     var avatarName = course.name;
     //Se nome do curso estiver vazio, retorna 'NA'
@@ -22,7 +22,13 @@ class courseController {
       //Se não estiver vazio, retorna as duas primeiras letras
       return avatarName.substring(0, 2).toUpperCase();
     }
+  }
 
-    
+  postNewCourse(CourseEntity courseEntity) async {
+    try {
+      await repository.postNewCourse(courseEntity);
+    } catch (e) {
+      rethrow;
+    }
   }
 }
