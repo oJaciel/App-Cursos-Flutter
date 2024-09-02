@@ -78,7 +78,12 @@ class _HomePageState extends State<HomePage> {
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             formNewCoursePage(courseEdit: snapshot.data![index]),
-                                      ));
+                                      )).then((value) {
+                                        _futureCourses = getCourses();
+                                        setState(() {
+                                          
+                                        });
+                                      });
                                 }),
                             SlidableAction(
                                 backgroundColor: Colors.red,

@@ -31,4 +31,12 @@ class courseController {
       rethrow;
     }
   }
+
+  putUpdateNewCourse(CourseEntity courseEntity) async {
+    try {
+      await repository.putUpdateCourse(courseEntity);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

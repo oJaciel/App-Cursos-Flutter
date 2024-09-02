@@ -18,6 +18,7 @@ class _formNewCoursePageState extends State<formNewCoursePage> {
   TextEditingController textNameController = TextEditingController();
   TextEditingController textDescriptionController = TextEditingController();
   TextEditingController textStartAtController = TextEditingController();
+  String id = ''; //ID para API fazer PUT
 
   courseController controller = courseController();
 
@@ -43,10 +44,34 @@ class _formNewCoursePageState extends State<formNewCoursePage> {
     }
   }
 
+  putUpdateCourse() async {
+    try {
+      await controller.putUpdateNewCourse(CourseEntity(
+          id: id,
+          name: textNameController.text,
+          description: textDescriptionController.text,
+          startAt: textStartAtController.text));
+      //
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Curso atualizado com sucesso."),
+        ),
+      );
+      Navigator.pop(context);
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('$e'),
+        ),
+      );
+    }
+  }
+
   //Verificando se tem parâmetros passados, para quando montar a tela preencher os campos
   @override
   void initState() {
     if (widget.courseEdit != null) {
+      id = widget.courseEdit?.id ?? '';
       textNameController.text = widget.courseEdit?.name ?? "";
       textDescriptionController.text = widget.courseEdit?.description ?? "";
       textStartAtController.text = widget.courseEdit?.startAt ?? "";
@@ -136,7 +161,13 @@ class _formNewCoursePageState extends State<formNewCoursePage> {
                         child: ElevatedButton(
                           onPressed: () async {
                             if (formKey.currentState!.validate()) {
-                              postNewCourse();
+                              if (widget.courseEdit != null) {
+                                //Se veio algum coisa por parâmetro na troca de telas, é uma edição
+                                putUpdateCourse();
+                              } else {
+                                //Se não foi passado nada, é um novo registro
+                                postNewCourse();
+                              }
                             }
                           },
                           child: const Text("Salvar"),

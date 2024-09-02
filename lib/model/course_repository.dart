@@ -23,11 +23,22 @@ class courseRepository {
     return courseList;
   }
 
+  //Adicionando novo curso
   postNewCourse(CourseEntity courseEntity) async {
     final json = jsonEncode(CourseEntity.toJson(courseEntity));
     var response = await http.post(url, body: json);
     if (response.statusCode != 201) {
       throw 'Problema ao inserir curso';
+    }
+  }
+
+  //Editando curso existente
+  putUpdateCourse(CourseEntity courseEntity) async {
+    final url = "$urlBaseApi/courses/${courseEntity.id}";
+    final json = jsonEncode(CourseEntity.toJson(courseEntity));
+    var response = await http.put(Uri.parse(url), body: json);
+    if (response.statusCode != 200) {
+      throw 'Problemas ao atualizar o curso';
     }
   }
 }
