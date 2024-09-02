@@ -3,7 +3,10 @@ import 'package:appmobile/model/course_model.dart';
 import 'package:flutter/material.dart';
 
 class formNewCoursePage extends StatefulWidget {
-  const formNewCoursePage({super.key});
+//Variável que recebe o parâmetro passado
+  final CourseEntity? courseEdit;
+
+  formNewCoursePage({super.key, this.courseEdit});
 
   @override
   State<formNewCoursePage> createState() => _formNewCoursePageState();
@@ -38,6 +41,17 @@ class _formNewCoursePageState extends State<formNewCoursePage> {
         ),
       );
     }
+  }
+
+  //Verificando se tem parâmetros passados, para quando montar a tela preencher os campos
+  @override
+  void initState() {
+    if (widget.courseEdit != null) {
+      textNameController.text = widget.courseEdit?.name ?? "";
+      textDescriptionController.text = widget.courseEdit?.description ?? "";
+      textStartAtController.text = widget.courseEdit?.startAt ?? "";
+    }
+    super.initState();
   }
 
   @override

@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const formNewCoursePage(),
+        builder: (context) => formNewCoursePage(),
       ),
     ).then((value) {
       _futureCourses = getCourses();
@@ -72,7 +72,14 @@ class _HomePageState extends State<HomePage> {
                                 backgroundColor: Colors.grey,
                                 foregroundColor: Colors.white,
                                 icon: Icons.edit,
-                                onPressed: (context) {}),
+                                onPressed: (context) {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            formNewCoursePage(courseEdit: snapshot.data![index]),
+                                      ));
+                                }),
                             SlidableAction(
                                 backgroundColor: Colors.red,
                                 foregroundColor: Colors.white,
