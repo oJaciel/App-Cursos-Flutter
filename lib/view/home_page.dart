@@ -1,6 +1,7 @@
 import 'package:appmobile/controller/course_controller.dart';
 import 'package:appmobile/model/course_model.dart';
 import 'package:appmobile/view/form_new_course_page.dart';
+import 'package:appmobile/view/menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -42,6 +43,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const MenuDrawer(),
       appBar: AppBar(
         title: const Text("Lista de Cursos"),
       ),
