@@ -41,4 +41,12 @@ class courseRepository {
       throw 'Problemas ao atualizar o curso';
     }
   }
+
+  deleteCourse(String id) async {
+    final url = '$urlBaseApi/courses/$id';
+    var response = await http.delete(Uri.parse(url));
+    if (response.statusCode != 200) {
+      throw Exception('Problemas ao excluir o curso');
+    }
+  }
 }

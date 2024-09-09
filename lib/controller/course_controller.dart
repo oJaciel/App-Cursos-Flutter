@@ -39,4 +39,12 @@ class courseController {
       rethrow;
     }
   }
+
+  deleteCourse(String id) async {
+    try {
+      await repository.deleteCourse(id);
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

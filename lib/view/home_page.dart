@@ -78,20 +78,48 @@ class _HomePageState extends State<HomePage> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            formNewCoursePage(courseEdit: snapshot.data![index]),
+                                        builder: (context) => formNewCoursePage(
+                                            courseEdit: snapshot.data![index]),
                                       )).then((value) {
-                                        _futureCourses = getCourses();
-                                        setState(() {
-                                          
-                                        });
-                                      });
+                                    _futureCourses = getCourses();
+                                    setState(() {});
+                                  });
                                 }),
                             SlidableAction(
                                 backgroundColor: Colors.red,
                                 foregroundColor: Colors.white,
                                 icon: Icons.delete,
-                                onPressed: (context) {})
+                                onPressed: (context) {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => AlertDialog(
+                                      title: const Text("Confirmação"),
+                                      content: const Text(
+                                          "Deseja excluir este curso?"),
+                                      actions: [
+                                        //Botão de cancelar
+                                        ElevatedButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text('Cancelar')),
+                                        //Botão de confirmar exclusão
+                                        ElevatedButton(
+                                            onPressed: () async {
+                                              await controller.deleteCourse(
+                                                  snapshot.data![index].id!);
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text('Confirmar'))
+                                      ],
+                                    ),
+                                  ).then((value) {
+                                    if (value) {
+                                      _futureCourses = getCourses();
+                                      setState(() => {});
+                                    }
+                                  });
+                                })
                           ],
                         ),
                         child: ListTile(
