@@ -1,5 +1,6 @@
 import 'package:appmobile/model/course_model.dart';
 import 'package:appmobile/model/course_repository.dart';
+import 'package:intl/intl.dart';
 
 class courseController {
   //Instanciando variável do repositório
@@ -46,5 +47,11 @@ class courseController {
     } catch (e) {
       rethrow;
     }
+  }
+
+  //Função para formatar data do DatePicker
+  dateTimeFormatToStringPtBR(DateTime dateSelected) {
+    DateFormat outputFormat = DateFormat('dd/MM/yyyy');
+    return outputFormat.format(dateSelected);
   }
 }

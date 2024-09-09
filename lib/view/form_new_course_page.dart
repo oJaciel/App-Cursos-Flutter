@@ -137,6 +137,18 @@ class _formNewCoursePageState extends State<formNewCoursePage> {
 
                             // Data de Início
                             TextFormField(
+                              onTap: () {
+                                showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime.now(),
+                                  lastDate: DateTime(2030),
+                                ).then((DateTime? value) {
+                                  if (value != null) {
+                                    textStartAtController.text = controller.dateTimeFormatToStringPtBR(value);
+                                  }
+                                });
+                              },
                               controller: textStartAtController,
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -144,10 +156,10 @@ class _formNewCoursePageState extends State<formNewCoursePage> {
                                 }
                                 return null;
                               },
-                              maxLength: 8,
                               keyboardType: TextInputType.datetime,
                               decoration: const InputDecoration(
-                                  hintText: "Digite a data de início"),
+                                  hintText: "Selecione a data de início",
+                                  icon: Icon(Icons.calendar_month))
                             ),
                           ],
                         ),
