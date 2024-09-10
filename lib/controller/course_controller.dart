@@ -49,9 +49,19 @@ class courseController {
     }
   }
 
-  //Função para formatar data do DatePicker
+  //Função para formatar data do DatePicker, DateTime para String
   dateTimeFormatToStringPtBR(DateTime dateSelected) {
     DateFormat outputFormat = DateFormat('dd/MM/yyyy');
     return outputFormat.format(dateSelected);
+  }
+
+  //Função para transformar o Date para String, String para DateTime
+  dateFormatStringPtBRtoAPI(String dateSelected) {
+    // 05/11/2024
+    String day = dateSelected.substring(0, 2);
+    String month = dateSelected.substring(3, 5);
+    String year = dateSelected.substring(6, 10);
+    String dateFormat = '$year-$month-${day}T00:00:00.000Z';
+    return dateFormat;
   }
 }

@@ -27,7 +27,7 @@ class _formNewCoursePageState extends State<formNewCoursePage> {
       await controller.postNewCourse(CourseEntity(
           name: textNameController.text,
           description: textDescriptionController.text,
-          startAt: textStartAtController.text));
+          startAt: controller.dateFormatStringPtBRtoAPI(textStartAtController.text)));
       //
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -50,8 +50,8 @@ class _formNewCoursePageState extends State<formNewCoursePage> {
           id: id,
           name: textNameController.text,
           description: textDescriptionController.text,
-          startAt: textStartAtController.text));
-      //
+          startAt: controller.dateFormatStringPtBRtoAPI(textStartAtController.text)));
+      
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Curso atualizado com sucesso."),
@@ -75,6 +75,8 @@ class _formNewCoursePageState extends State<formNewCoursePage> {
       textNameController.text = widget.courseEdit?.name ?? "";
       textDescriptionController.text = widget.courseEdit?.description ?? "";
       textStartAtController.text = widget.courseEdit?.startAt ?? "";
+      //controller.dateTimeFormatToStringPtBR(DateTime.parse(widget.courseEdit?.startAt ?? '')) ?? "--/--/----"
+      //textStartAtController não está recebendo nada, verificar
     }
     super.initState();
   }
@@ -139,6 +141,7 @@ class _formNewCoursePageState extends State<formNewCoursePage> {
                             TextFormField(
                               onTap: () {
                                 showDatePicker(
+                                  locale: const Locale('pt', 'BR'),
                                   context: context,
                                   initialDate: DateTime.now(),
                                   firstDate: DateTime.now(),
