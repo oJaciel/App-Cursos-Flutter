@@ -7,9 +7,8 @@ import 'package:http/http.dart' as http;
 class HolidayRepository {
   //Função para captar o ano do sistema
   String getYear() {
-    DateTime currentDate = new DateTime.now();
-    DateTime year = new DateTime(currentDate.year);
-    return year.toString();
+    DateTime currentDate = DateTime.now();
+    return currentDate.year.toString();
   }
 
   // Função para construir a URL incluindo o ano do sistema
