@@ -42,6 +42,7 @@ class courseRepository {
     }
   }
 
+  //Deletando um curso
   deleteCourse(String id) async {
     final url = '$urlBaseApi/courses/$id';
     var response = await http.delete(Uri.parse(url));
