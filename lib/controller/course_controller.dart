@@ -6,6 +6,7 @@ class courseController {
   //Instanciando variável do repositório
   courseRepository repository = courseRepository();
 
+  //Função para fazer get dos cursos
   Future<List<CourseEntity>> getCourseList() async {
     List<CourseEntity> list = await repository.getAll();
     //Aqui poderia alterar, formatar, implementar regras na lista
@@ -25,6 +26,7 @@ class courseController {
     }
   }
 
+  //Função para adicionar novo curso
   postNewCourse(CourseEntity courseEntity) async {
     try {
       await repository.postNewCourse(courseEntity);
@@ -33,6 +35,7 @@ class courseController {
     }
   }
 
+  //Função para fazer update em um curso
   putUpdateNewCourse(CourseEntity courseEntity) async {
     try {
       await repository.putUpdateCourse(courseEntity);
@@ -41,6 +44,7 @@ class courseController {
     }
   }
 
+  //Função para deletar um curso
   deleteCourse(String id) async {
     try {
       await repository.deleteCourse(id);
