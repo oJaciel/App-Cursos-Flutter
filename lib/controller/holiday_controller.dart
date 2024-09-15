@@ -11,4 +11,15 @@ class HolidayController {
     return list;
   }
   
+  //Função para formatar data dos feriados para padrão pt-BR
+  dateFormatStringPtBR(String dateSelected) {
+    //Dado entra 2024-01-01
+    //Dado sai 01/01/2024
+    String day = dateSelected.substring(8, 10);
+    String month = dateSelected.substring(5, 7);
+    String year = dateSelected.substring(0, 4);
+    String dateFormat = '$day/$month/${year}';
+    return dateFormat;
+  }
+
 }

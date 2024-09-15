@@ -47,7 +47,7 @@ class _HolidayPageState extends State<HolidayPage> {
                     child: ListTile(
                       title:
                           Text(snapshot.data![index].name ?? "Não informado"),
-                      subtitle: Text(snapshot.data![index].date ?? "Não informado"),
+                      subtitle: Text(controller.dateFormatStringPtBR(snapshot.data![index].date ?? "Não informado") ),
                     ),
                   );
                 });
