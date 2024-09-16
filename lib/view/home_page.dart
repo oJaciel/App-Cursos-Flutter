@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                                       ],
                                     ),
                                   ).then((value) {
-                                    if (value) {
+                                    if (value == true) {
                                       _futureCourses = getCourses();
                                       setState(() => {});
                                     }
