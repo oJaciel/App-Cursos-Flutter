@@ -44,11 +44,9 @@ class _HolidayPageState extends State<HolidayPage> {
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 return Card(
-                  margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-                  elevation: 4,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
+                  margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
+                  elevation: 2,
+                  shape: const LinearBorder(),
                   child: ListTile(
                     contentPadding: const EdgeInsets.all(12),
                     title: Text(
