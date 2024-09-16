@@ -33,24 +33,43 @@ class _HolidayPageState extends State<HolidayPage> {
     return Scaffold(
       drawer: const MenuDrawer(),
       appBar: AppBar(
-        title: const Text("Feriados"),
+        //Ano do texto fica de acordo com ano atual
+        title: Text("Feriados ${controller.getYear()}"),
       ),
       body: FutureBuilder(
         future: _futureHolidays,
         builder: (context, AsyncSnapshot<List<HolidayEntity>> snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (context, index) {
-                  return Card(
-                    elevation: 5,
-                    child: ListTile(
-                      title:
-                          Text(snapshot.data![index].name ?? "Não informado"),
-                      subtitle: Text(controller.dateFormatStringPtBR(snapshot.data![index].date ?? "Não informado") ),
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                return Card(
+                  margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+                  elevation: 4,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: ListTile(
+                    contentPadding: const EdgeInsets.all(12),
+                    title: Text(
+                      snapshot.data![index].name ?? "Não informado",
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  );
-                });
+                    subtitle: Text(
+                      controller.dateFormatStringPtBR(snapshot.data![index].date ?? "Não informado"),
+                    ),
+                    leading: const Icon(
+                      Icons.calendar_today,
+                      color: Colors.deepPurple,
+                    ),
+                  ),
+                );
+              },
+            );
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Erro: ${snapshot.error}'));
           } else {
             return const Center(child: CircularProgressIndicator());
           }

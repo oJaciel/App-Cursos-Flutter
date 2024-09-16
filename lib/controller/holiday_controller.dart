@@ -10,7 +10,7 @@ class HolidayController {
     List<HolidayEntity> list = await repository.getAll();
     return list;
   }
-  
+
   //Função para formatar data dos feriados para padrão pt-BR
   dateFormatStringPtBR(String dateSelected) {
     //Dado entra 2024-01-01
@@ -22,4 +22,9 @@ class HolidayController {
     return dateFormat;
   }
 
+  //Função para captar o ano do sistema
+  //Utilizado no texto da AppBar da tela de feriados
+  String getYear() {
+    return repository.getYear();
+  }
 }
